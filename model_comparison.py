@@ -1,6 +1,6 @@
 from data import Data
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import ComplementNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
@@ -10,8 +10,9 @@ distributions = ["full", "partial", "even"]
 models = [
     LinearSVC(),
     RandomForestClassifier(n_estimators=100, max_depth=10, random_state=0),
-    MultinomialNB(),
+    ComplementNB(alpha=3/8),
     LogisticRegression(random_state=0),
+    MLPClassifier(hidden_layer_sizes=(300, 16)),
 ]
 
 for distribution in distributions:
