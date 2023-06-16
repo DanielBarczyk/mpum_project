@@ -4,6 +4,9 @@ from sklearn.naive_bayes import ComplementNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import LinearSVC
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+import pandas as pd
 
 distributions = ["full", "partial", "even"]
 
@@ -14,6 +17,8 @@ models = [
     LogisticRegression(random_state=0),
     MLPClassifier(hidden_layer_sizes=(300, 16)),
 ]
+
+named_labels = ["enfj", "enfp", "entj", "entp", "esfj", "esfp", "estj", "estp", "infj", "infp", "intj", "intp", "isfj", "isfp", "istj", "istp"]
 
 for distribution in distributions:
     print(distribution)
@@ -26,4 +31,7 @@ for distribution in distributions:
         print(model.__class__.__name__)
         clf = model.fit(X_train, y_train)
         print("Accuracy:", clf.score(X_test, y_test))
+        y_pred = clf.predict(X_test)
+        cm = confusion_matrix(y_test, y_pred)
+        print("Confusion matrix:\n", pd.DataFrame(cm, columns = named_labels, index = named_labels))
         print()
