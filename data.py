@@ -10,7 +10,7 @@ personalities = ["enfj", "enfp", "entj", "entp", "esfj", "esfp", "estj", "estp",
 class Data():
     """ Use get_data() to get features and labels for Twitter MBTI data """
 
-    def __init__(self, filename="twitter_MBTI.csv", distribution="partial", vectorization="tfidf", label_idx=2, feature_idx=1, use_single=None) -> None:
+    def __init__(self, filename="dane/twitter_MBTI.csv", distribution="partial", vectorization="tfidf", label_idx=2, feature_idx=1, use_single=None) -> None:
         file = open(filename, "r")
         self.raw_data = np.array(list(csv.reader(file, delimiter=",")))
         file.close()
@@ -34,7 +34,7 @@ class Data():
         if use_single == None:
             self.labels = np.array([np.where(self.all_labels == label) for label in self.labels]).flatten()
         else:
-            self.labels = np.array([1 if self.all_labels[0][use_single] == label[use_single] else 0 for label in self.labels]).flatten()
+            self.labels = np.array([1 if personalities[0][use_single] == label[use_single] else 0 for label in self.labels]).flatten()
 
         self.__vectorize(vectorization)
 

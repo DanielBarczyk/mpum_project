@@ -12,7 +12,7 @@ distributions = ["full", "partial", "even"]
 
 models = [
     LinearSVC(),
-    RandomForestClassifier(n_estimators=100, max_depth=10, random_state=0),
+    RandomForestClassifier(random_state=0),
     ComplementNB(alpha=3/8),
     LogisticRegression(random_state=0),
     MLPClassifier(hidden_layer_sizes=(300, 16)),
